@@ -19,6 +19,8 @@ export class AuthPage extends BasePage {
     headerFullNameLocator = this.page.locator('ngx-header').getByText(this.defaultFullName);
 
     logOutTitle = this.page.getByTitle('Log out');
+
+    emailErrorMessage = this.page.getByText('Email should be the real one!');
    
     constructor(protected page: Page) {
       super(page);
@@ -45,8 +47,7 @@ export class AuthPage extends BasePage {
         await this.emailInput.pressSequentially(registerUserData.email);
         await this.passwordInput.pressSequentially(registerUserData.password);
         await this.repeatPasswordInput.pressSequentially(registerUserData.password);
-        await this.agreementCheckbox.click();
-        await this.registerButton.click(); 
+        await this.agreementCheckbox.click(); 
     }
 
     async logOut(): Promise<void> {
