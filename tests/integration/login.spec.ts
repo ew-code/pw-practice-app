@@ -7,6 +7,7 @@ test.describe("User Login Tests", () => {
 
   test.beforeEach(async ({ page }) => {
     authPage = new AuthPage(page);
+    await authPage.navigateToLogin();
   });
 
   test.afterEach(async () => {

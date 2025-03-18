@@ -7,6 +7,7 @@ test.describe("User Registration Tests", () => {
 
   test.beforeEach(async ({ page }) => {
     authPage = new AuthPage(page);
+    await authPage.navigateToRegister();
   });
 
   test("User can register with valid data", async ({}) => {
@@ -37,7 +38,7 @@ test.describe("User Registration Tests", () => {
   test("User cannot register with an empty email", async ({}) => {
     // Arrange
     const invalidUserData = prepareRandomUser();
-    invalidUserData.email = "";
+    invalidUserData.email = '';
 
     // Act
     await authPage.registerToApp(invalidUserData);
@@ -53,7 +54,6 @@ test.describe("User Registration Tests", () => {
     const mismatchedPassword = "differentPassword";
 
     // Act
-    await authPage.navigateToRegister();
     await authPage.fullNameInput.fill(newUserData.fullName);
     await authPage.emailInput.fill(newUserData.email);
     await authPage.passwordInput.fill(newUserData.password);
@@ -61,16 +61,16 @@ test.describe("User Registration Tests", () => {
     await authPage.agreementCheckbox.click();
 
     // Assert
-    await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);//password validation is missing
+    await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);
+    //1 password validation is missing
   });
 
   test("User cannot register with a short password", async () => {
     // Arrange
     const newUserData = prepareRandomUser();
-    newUserData.password = '123'; //there is no validation in the repeat password field
+    newUserData.password = '123'; //2 there is no validation in the repeat password field
 
     // Act
-    await authPage.navigateToRegister();
     await authPage.fullNameInput.fill(newUserData.fullName);
     await authPage.emailInput.fill(newUserData.email);
     await authPage.passwordInput.fill(newUserData.password);
@@ -83,17 +83,32 @@ test.describe("User Registration Tests", () => {
   test("User cannot register with empty password", async () => {
     // Arrange
     const newUserData = prepareRandomUser();
-    newUserData.password = '';
+    const emptyPassword = '';
 
     // Act
-    await authPage.navigateToRegister();
     await authPage.fullNameInput.fill(newUserData.fullName);
     await authPage.emailInput.fill(newUserData.email);
-    await authPage.passwordInput.fill(newUserData.password);
+    await authPage.passwordInput.fill(emptyPassword);
     await authPage.agreementCheckbox.click();
 
     // Assert
     await expect(authPage.passwordRequiredMessage).toBeVisible();
+  });
+
+  test("User cannot register without repeating the password", async () => {
+    // Arrange
+    const newUserData = prepareRandomUser();
+    const emptyRepeatPassword = '';
+
+    // Act
+    await authPage.fullNameInput.fill(newUserData.fullName);
+    await authPage.emailInput.fill(newUserData.email);
+    await authPage.passwordInput.fill(newUserData.password);
+    await authPage.repeatPasswordInput.fill(emptyRepeatPassword);
+    await authPage.agreementCheckbox.click();
+
+    // Assert
+    await expect(authPage.passwordRepeatRequiredMessage).toBeVisible();
   });
 
   test("User cannot register without accepting the terms and conditions", async () => {
@@ -101,13 +116,12 @@ test.describe("User Registration Tests", () => {
     const newUserData = prepareRandomUser();
 
     // Act
-    await authPage.navigateToRegister();
     await authPage.fullNameInput.fill(newUserData.fullName);
     await authPage.emailInput.fill(newUserData.email);
     await authPage.passwordInput.fill(newUserData.password);
     await authPage.repeatPasswordInput.fill(newUserData.password);
 
     // Assert
-    await expect(authPage.registerButton).toBeDisabled();//there is no validation for not marking consents
+    await expect(authPage.registerButton).toBeDisabled();//3 there is no validation for not marking consents
   });
 });

@@ -24,6 +24,7 @@ export class AuthPage extends BasePage {
     emailRequiredMessage = this.page.getByText('Email is required');
     passwordInvalidFormatMessage = this.page.getByText('Password should contain from');
     passwordRequiredMessage = this.page.getByText('Password is required');
+    passwordRepeatRequiredMessage = this.page.getByText('Password confirmation is');
 
     constructor(protected page: Page) {
       super(page);
@@ -38,14 +39,12 @@ export class AuthPage extends BasePage {
     }
 
     async loginToApp(appLoginCredentials: LoginUserModel): Promise<void> {
-        await this.navigateToLogin();
         await this.emailInput.pressSequentially(appLoginCredentials.userEmail);
         await this.passwordInput.pressSequentially(appLoginCredentials.password);
         await this.loginButton.click();
     }
 
     async registerToApp(registerUserData: RegisterUserModel): Promise<void> {
-        await this.navigateToRegister();
         await this.fullNameInput.pressSequentially(registerUserData.fullName);
         await this.emailInput.pressSequentially(registerUserData.email);
         await this.passwordInput.pressSequentially(registerUserData.password);
