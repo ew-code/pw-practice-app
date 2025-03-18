@@ -1,12 +1,23 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "./base.page";
-import { LoginUserModel } from "../models/user.model";
+import { LoginUserModel, RegisterUserModel } from "../models/user.model";
 
 export class AuthPage extends BasePage {
     loginUrl = `${process.env.BASE_URL}/auth/login`;
+    registerUrl = `${process.env.BASE_URL}/auth/register`;
+
     emailInput = this.page.locator('#input-email');
     passwordInput = this.page.locator('#input-password');
     loginButton = this.page.getByRole('button', { name: 'Log In' });
+
+    fullNameInput = this.page.locator('#input-name');
+    repeatPasswordInput = this.page.locator('#input-re-password');
+    agreementCheckbox = this.page.locator('span').first();
+    registerButton = this.page.getByRole('button', { name: 'Register' });
+
+    defaultFullName = 'Nick Jones'; 
+    headerFullNameLocator = this.page.locator('ngx-header').getByText(this.defaultFullName);
+
    
     constructor(protected page: Page) {
       super(page);
@@ -16,10 +27,24 @@ export class AuthPage extends BasePage {
         await this.page.goto(this.loginUrl);
     }
 
+    async navigateToRegister(): Promise<void> {
+        await this.page.goto(this.registerUrl);
+    }
+
     async loginToApp(appLoginCredentials: LoginUserModel): Promise<void> {
         await this.navigateToLogin();
         await this.emailInput.pressSequentially(appLoginCredentials.userEmail);
         await this.passwordInput.pressSequentially(appLoginCredentials.password);
-        await this.passwordInput.press('Enter');
+        await this.loginButton.click();
+    }
+
+    async registerToApp(registerUserData: RegisterUserModel): Promise<void> {
+        await this.navigateToRegister();
+        await this.fullNameInput.pressSequentially(registerUserData.fullName);
+        await this.emailInput.pressSequentially(registerUserData.email);
+        await this.passwordInput.pressSequentially(registerUserData.password);
+        await this.repeatPasswordInput.pressSequentially(registerUserData.password);
+        await this.agreementCheckbox.click();
+        await this.registerButton.click(); 
     }
 }
