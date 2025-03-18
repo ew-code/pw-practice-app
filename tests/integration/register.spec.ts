@@ -63,7 +63,7 @@ test.describe("User Registration Tests", () => {
     await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);//1 password validation is missing
   });
 
-  test("User cannot register with a short password", async () => {
+  test("User cannot register with too short password", async () => {
     // Arrange
     const newUserData = prepareRandomUser();
     const tooShortPassword = '123'; //2 there is no validation in the repeat password field
