@@ -41,7 +41,6 @@ export class AuthPage extends BasePage {
     async loginToApp(appLoginCredentials: LoginUserModel): Promise<void> {
         await this.emailInput.pressSequentially(appLoginCredentials.userEmail);
         await this.passwordInput.pressSequentially(appLoginCredentials.password);
-        await this.loginButton.click();
     }
 
     async registerToApp(registerUserData: RegisterUserModel): Promise<void> {
