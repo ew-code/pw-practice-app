@@ -31,8 +31,21 @@ test.describe("User Registration Tests", () => {
     await authPage.registerToApp(invalidUserData);
 
     // Assert
-    await expect(authPage.emailErrorMessage).toBeVisible();
+    await expect(authPage.emailInvalidFormatMessage).toBeVisible();
   });
+
+  test("User cannot register with an empty email", async ({}) => {
+    // Arrange
+    const invalidUserData = prepareRandomUser();
+    invalidUserData.email = "";
+
+    // Act
+    await authPage.registerToApp(invalidUserData);
+
+    // Assert
+    await expect(authPage.emailRequiredMessage).toBeVisible();
+  });
+
 
   test("User cannot register with mismatched passwords", async ({page}) => {
     // Arrange
@@ -49,6 +62,38 @@ test.describe("User Registration Tests", () => {
 
     // Assert
     await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);//password validation is missing
+  });
+
+  test("User cannot register with a short password", async () => {
+    // Arrange
+    const newUserData = prepareRandomUser();
+    newUserData.password = '123'; //there is no validation in the repeat password field
+
+    // Act
+    await authPage.navigateToRegister();
+    await authPage.fullNameInput.fill(newUserData.fullName);
+    await authPage.emailInput.fill(newUserData.email);
+    await authPage.passwordInput.fill(newUserData.password);
+    await authPage.agreementCheckbox.click();
+
+    // Assert
+    await expect(authPage.passwordInvalidFormatMessage).toBeVisible();
+  });
+
+  test("User cannot register with empty password", async () => {
+    // Arrange
+    const newUserData = prepareRandomUser();
+    newUserData.password = '';
+
+    // Act
+    await authPage.navigateToRegister();
+    await authPage.fullNameInput.fill(newUserData.fullName);
+    await authPage.emailInput.fill(newUserData.email);
+    await authPage.passwordInput.fill(newUserData.password);
+    await authPage.agreementCheckbox.click();
+
+    // Assert
+    await expect(authPage.passwordRequiredMessage).toBeVisible();
   });
 
   test("User cannot register without accepting the terms and conditions", async () => {

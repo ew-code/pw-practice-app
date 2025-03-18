@@ -20,8 +20,11 @@ export class AuthPage extends BasePage {
 
     logOutTitle = this.page.getByTitle('Log out');
 
-    emailErrorMessage = this.page.getByText('Email should be the real one!');
-   
+    emailInvalidFormatMessage = this.page.getByText('Email should be the real one!');
+    emailRequiredMessage = this.page.getByText('Email is required');
+    passwordInvalidFormatMessage = this.page.getByText('Password should contain from');
+    passwordRequiredMessage = this.page.getByText('Password is required');
+
     constructor(protected page: Page) {
       super(page);
     }
