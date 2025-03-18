@@ -1,4 +1,4 @@
-import test from "@playwright/test";
+import test, { expect } from "@playwright/test";
 import { AuthPage } from "../../src/pages/auth.page";
 import { appLoginCredentials } from "../../src/test-data/login.data";
 
@@ -10,10 +10,12 @@ test.describe("Login tests", () => {
     authPage = new AuthPage(page);
   });
 
+  test.afterEach(async ({}) => {
+    await authPage.logOut();
+  });
 
-test('Login to App with existing user', async ({ page }) => {
+test('Login to App with existing user', async ({}) => {
     await authPage.loginToApp(appLoginCredentials);
-    await page.locator('ngx-header').getByText('Nick Jones').click();
-    await page.getByTitle('Log out').click();
+    await expect(authPage.headerFullNameLocator).toBeVisible();
   });
 });

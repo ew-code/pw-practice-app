@@ -18,6 +18,7 @@ export class AuthPage extends BasePage {
     defaultFullName = 'Nick Jones'; 
     headerFullNameLocator = this.page.locator('ngx-header').getByText(this.defaultFullName);
 
+    logOutTitle = this.page.getByTitle('Log out');
    
     constructor(protected page: Page) {
       super(page);
@@ -46,5 +47,10 @@ export class AuthPage extends BasePage {
         await this.repeatPasswordInput.pressSequentially(registerUserData.password);
         await this.agreementCheckbox.click();
         await this.registerButton.click(); 
+    }
+
+    async logOut(): Promise<void> {
+       await this.headerFullNameLocator.click();
+       await this.logOutTitle.click();
     }
 }
