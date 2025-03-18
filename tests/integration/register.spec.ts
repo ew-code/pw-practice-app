@@ -46,9 +46,23 @@ test.describe("User Registration Tests", () => {
     await authPage.passwordInput.fill(newUserData.password);
     await authPage.repeatPasswordInput.fill(mismatchedPassword);
     await authPage.agreementCheckbox.click();
-    // await authPage.registerButton.click();
 
     // Assert
     await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);//password validation is missing
+  });
+
+  test("User cannot register without accepting the terms and conditions", async () => {
+    // Arrange
+    const newUserData = prepareRandomUser();
+
+    // Act
+    await authPage.navigateToRegister();
+    await authPage.fullNameInput.fill(newUserData.fullName);
+    await authPage.emailInput.fill(newUserData.email);
+    await authPage.passwordInput.fill(newUserData.password);
+    await authPage.repeatPasswordInput.fill(newUserData.password);
+
+    // Assert
+    await expect(authPage.registerButton).toBeDisabled();//there is no validation for not marking consents
   });
 });
