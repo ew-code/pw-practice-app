@@ -7,16 +7,21 @@ test.describe("Dashboard Smoke Tests", () => {
 
   test.beforeEach(async ({ page }) => {
     dashboardPage = new DashboardPage(page);
-  });
-
-
-  test("IoT dashboard link and user profile name should be displayed", async ({ page }) => {
-    // Act:
     await dashboardPage.navigateTo();
-
-    // Assert:
-    await expect(dashboardPage.iotDashboardLink).toBeVisible();
-    await expect(dashboardPage.userProfileName).toBeVisible();
-    });
   });
 
+    test("All core widgets should be visible on the dashboard", async ({ page }) => {
+      await expect(dashboardPage.lightText).toBeVisible();
+      await expect(dashboardPage.rollerShadesText).toBeVisible();
+      await expect(dashboardPage.wirelessAudioText).toBeVisible();
+      await expect(dashboardPage.coffeeMakerText).toBeVisible();
+      await expect(dashboardPage.roomManagementText).toBeVisible();
+      });
+  
+    
+      test('User can toggle the light on and off', async () => {
+        await dashboardPage.lightSwitchOff();
+        await dashboardPage.lightSwitchOn();
+      });
+});
+  
