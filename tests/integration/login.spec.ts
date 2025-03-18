@@ -2,20 +2,25 @@ import test, { expect } from "@playwright/test";
 import { AuthPage } from "../../src/pages/auth.page";
 import { appLoginCredentials } from "../../src/test-data/login.data";
 
-test.describe("Login tests", () => {
+test.describe("User Login Tests", () => {
   let authPage: AuthPage;
-
 
   test.beforeEach(async ({ page }) => {
     authPage = new AuthPage(page);
   });
 
-  test.afterEach(async ({}) => {
+  test.afterEach(async () => {
     await authPage.logOut();
   });
 
-test('Login to App with existing user', async ({}) => {
-    await authPage.loginToApp(appLoginCredentials);
+  test("User can log in with valid credentials", async () => {
+    // Arrange
+    const loginCredentials = appLoginCredentials;
+
+    // Act
+    await authPage.loginToApp(loginCredentials);
+
+    // Assert
     await expect(authPage.headerFullNameLocator).toBeVisible();
   });
 });
