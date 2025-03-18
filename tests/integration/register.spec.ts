@@ -47,7 +47,6 @@ test.describe("User Registration Tests", () => {
     await expect(authPage.emailRequiredMessage).toBeVisible();
   });
 
-
   test("User cannot register with mismatched passwords", async ({page}) => {
     // Arrange
     const newUserData = prepareRandomUser();
@@ -61,19 +60,18 @@ test.describe("User Registration Tests", () => {
     await authPage.agreementCheckbox.click();
 
     // Assert
-    await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);
-    //1 password validation is missing
+    await expect(page.locator("input#input-re-password")).toHaveClass(/status-danger/);//1 password validation is missing
   });
 
   test("User cannot register with a short password", async () => {
     // Arrange
     const newUserData = prepareRandomUser();
-    newUserData.password = '123'; //2 there is no validation in the repeat password field
+    const tooShortPassword = '123'; //2 there is no validation in the repeat password field
 
     // Act
     await authPage.fullNameInput.fill(newUserData.fullName);
     await authPage.emailInput.fill(newUserData.email);
-    await authPage.passwordInput.fill(newUserData.password);
+    await authPage.passwordInput.fill(tooShortPassword);
     await authPage.agreementCheckbox.click();
 
     // Assert
