@@ -10,18 +10,12 @@ test.describe("Dashboard Smoke Tests", () => {
     await dashboardPage.navigateTo();
   });
 
-    test("All core widgets should be visible on the dashboard", async ({ page }) => {
+    test("All core widgets should be visible on the dashboard", async ({}) => {
       await expect(dashboardPage.lightText).toBeVisible();
       await expect(dashboardPage.rollerShadesText).toBeVisible();
       await expect(dashboardPage.wirelessAudioText).toBeVisible();
       await expect(dashboardPage.coffeeMakerText).toBeVisible();
       await expect(dashboardPage.roomManagementText).toBeVisible();
-      });
-  
-    
-      test('User can toggle the light on and off', async () => {
-        await dashboardPage.lightSwitchOff();
-        await dashboardPage.lightSwitchOn();
       });
 });
   

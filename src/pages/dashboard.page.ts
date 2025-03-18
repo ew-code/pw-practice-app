@@ -11,6 +11,8 @@ export class DashboardPage extends BasePage {
     lightOffText = this.page.getByText('LightOFF');
     lightOnText = this.page.getByText('LightON');
     rollerShadesText = this.page.getByText('Roller Shades')
+    rollerShadesOnText = this.page.getByText('Roller ShadesON')
+    rollerShadesOffText = this.page.getByText('Roller ShadesOFF')
     wirelessAudioText = this.page.getByText('Wireless Audio');
     coffeeMakerText = this.page.getByText('Coffee Maker');
     roomManagementText = this.page.getByText('Room Management');
@@ -32,4 +34,15 @@ export class DashboardPage extends BasePage {
         await this.lightOffText.click();
         await expect(this.lightOnText).toBeVisible();
       }
+
+      async rollerShadesOff() {
+        await this.rollerShadesOnText.click();
+        await expect(this.rollerShadesOffText).toBeVisible();
+      }
+
+      async rollerShadesOn() {
+        await this.rollerShadesOffText.click();
+        await expect(this.rollerShadesOnText).toBeVisible();
+      }
+
 }
