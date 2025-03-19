@@ -138,13 +138,15 @@ This project uses the following approaches to manage test data and improve test 
    - Static and dynamic test data is stored in a structured way to ensure consistency across tests.
    - Example: Login credentials are stored in a `test-data` file for reuse in multiple tests.
 
-### Test Cases
+## Test Cases
 
 For the purpose of the recruitment process, a separate file `TESTS.md` has been added. This file contains detailed descriptions of all implemented test cases, including their purpose, steps, and expected outcomes.
 
 You can find the test case details in the [TESTS.md](./TESTS.md) file.
 
-### Ngx-Admin Angular 14 application from akveo.com
+
+-------------------------------------------------------
+#### Ngx-Admin Angular 14 application from akveo.com
 
 This is a modified and more lightweight version of the original application to practice UI Automation with Playwright.
 
