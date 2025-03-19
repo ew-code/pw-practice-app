@@ -87,7 +87,7 @@ npm install --save-dev @faker-js/faker
 
 This library allows you to generate random data such as names, emails, and addresses — useful for testing input fields and dynamic scenarios.
 
-### 6. Run the Application (Optional)
+### 6. Run the Application
 
 If your project requires running the app locally, you can start it using:
 
