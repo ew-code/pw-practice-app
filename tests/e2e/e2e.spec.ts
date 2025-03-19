@@ -29,27 +29,26 @@ test("User can log in and check security cameras", async () => {
 });
 
 test("User can view Electricity Consumption for January in different years", async ({page}) => {
-    
+    // Arrange
+    const currentYear = new Date().getFullYear();
+    const yearMinus10 = (currentYear - 10).toString();
+    const yearMinus9 = (currentYear - 9).toString();
+    const yearMinus8 = (currentYear - 8).toString();
+
     await test.step("Log in with the new user", async () => {
         await authPage.logInUser(appLoginCredentials);
       });
 
-    await test.step("Check Electricity Consumption for January 2015", async () => {
-      await page.getByRole('link', { name: '2015' }).click();
-      await expect(dashboardPage.year2015).toBeVisible();
-      await expect(page.getByRole('listitem').filter({ hasText: 'Jan 0.97 816 kWh / 97 USD' }).locator('rect')).toBeVisible();
+    await test.step("Check Electricity Consumption for January 10 years ago", async () => {
+      await dashboardPage.checkElectricityConsumption(yearMinus10, '0.97 816 kWh / 97 USD');
     });
 
-    await test.step("Check Electricity Consumption for January 2016", async () => {
-      await page.getByRole('link', { name: '2016' }).click();
-      await expect(dashboardPage.year2016).toBeVisible();
-      await expect(page.getByRole('listitem').filter({ hasText: 'Jan 1.56 789 kWh / 91 USD' }).locator('rect')).toBeVisible();
+    await test.step("Check Electricity Consumption for January 9 years ago", async () => {
+      await dashboardPage.checkElectricityConsumption(yearMinus9, '1.56 789 kWh / 91 USD');
     });
 
-    await test.step("Check Electricity Consumption for January 2017", async () => {
-      await page.getByRole('link', { name: '2017' }).click();
-      await expect(dashboardPage.year2017).toBeVisible();
-      await expect(page.getByRole('listitem').filter({ hasText: 'Jan 1.34 789 kWh / 91 USD' }).locator('path')).toBeVisible();
+    await test.step("Check Electricity Consumption for January 8 years ago", async () => {
+      await dashboardPage.checkElectricityConsumption(yearMinus8, '1.34 789 kWh / 91 USD');
     });
   });
 

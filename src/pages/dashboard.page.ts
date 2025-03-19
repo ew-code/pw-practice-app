@@ -26,16 +26,21 @@ export class DashboardPage extends BasePage {
     thirdCamera = this.page.locator('text=Camera #3');
     fourthCamera = this.page.locator('text=Camera #4');
 
-    year2015 = this.page.getByRole('link', { name: '2015' })
-    year2016 = this.page.getByRole('link', { name: '2016' })
-    year2017 = this.page.getByRole('link', { name: '2017' })
-  
     constructor(protected page: Page) {
       super(page);
     }
   
     async navigateTo(): Promise<void> {
         await this.page.goto(this.url);
+    }
+
+    getYearLink(year: string) {
+        return this.page.getByRole('link', { name: year });
+    }
+
+    async checkElectricityConsumption(year: string, expectedText: string) {
+        await this.getYearLink(year).click();
+        await expect(this.page.getByRole('listitem').filter({ hasText: `Jan ${expectedText}` })).toBeVisible();
     }
 
     async toggleLightSwitch() {
