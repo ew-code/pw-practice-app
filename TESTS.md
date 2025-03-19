@@ -83,11 +83,12 @@ This document provides an overview of the test cases implemented in the project.
 ## Additional Information
 
 ### Factories
-- **Purpose**: Factories are used to generate dynamic test data for various scenarios.
+- **Purpose**: Factories are used to generate dynamic test data for various scenarios.(src/factories)
 - **Example**: Creating user profiles, generating random credentials, or populating forms with dynamic data.
 
 ### Models
-- **Purpose**: Models represent the structure of data<!-- filepath: /Users/ewelinawesolowska/Desktop/Projekty/pw-practice-app/TESTS.md -->
+- **Purpose**: Models represent the structure of data (src/models)
+
 # Test Cases
 
 This document provides an overview of the test cases implemented in the project. The tests are categorized into **Smoke**, **Functional**, **Integration**, **End-to-End**, and **Regression** tests.
