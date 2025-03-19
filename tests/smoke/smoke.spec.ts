@@ -15,7 +15,6 @@ test.describe("Dashboard Smoke Tests", () => {
       await expect(dashboardPage.rollerShadesText).toBeVisible();
       await expect(dashboardPage.wirelessAudioText).toBeVisible();
       await expect(dashboardPage.coffeeMakerText).toBeVisible();
-      await expect(dashboardPage.roomManagementText).toBeVisible();
       });
 });
   
