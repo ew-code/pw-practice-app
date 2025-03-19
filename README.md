@@ -122,6 +122,28 @@ npx playwright test --headed
 npx playwright show-report
 ```
 
+### Test Data, Factories, and Models
+
+This project uses the following approaches to manage test data and improve test maintainability:
+
+1. **Factories**:
+   - Factories are used to generate dynamic test data for various scenarios.
+   - Example: Creating user profiles with randomized names, emails, and addresses using `@faker-js/faker`.
+
+2. **Models**:
+   - Models represent the structure of data used in the application.
+   - Example: A `UserModel` defines the properties of a user, such as `name`, `email`, and `password`.
+
+3. **Test Data**:
+   - Static and dynamic test data is stored in a structured way to ensure consistency across tests.
+   - Example: Login credentials are stored in a `test-data` file for reuse in multiple tests.
+
+### Test Cases
+
+For the purpose of the recruitment process, a separate file `TESTS.md` has been added. This file contains detailed descriptions of all implemented test cases, including their purpose, steps, and expected outcomes.
+
+You can find the test case details in the [TESTS.md](./TESTS.md) file.
+
 ### Ngx-Admin Angular 14 application from akveo.com
 
 This is a modified and more lightweight version of the original application to practice UI Automation with Playwright.

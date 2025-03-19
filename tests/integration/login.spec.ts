@@ -34,7 +34,6 @@ test.describe("User Login Tests", () => {
     await expect(authPage.emailInvalidFormatMessage).toBeVisible();
   });
 
-//TODO
   test("User cannot log in with invalid password", async () => {
     // Arrange
     const invalidCredentials = { ...appLoginCredentials, password: "123" };
