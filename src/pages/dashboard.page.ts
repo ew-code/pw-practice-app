@@ -20,6 +20,11 @@ export class DashboardPage extends BasePage {
     coffeeMakerOnText = this.page.getByText('Coffee MakerON');
     coffeeMakerOffText = this.page.getByText('Coffee MakerOFF');
     roomManagementText = this.page.getByText('Room Management');
+
+    firstCamera = this.page.locator('text=Camera #1');
+    secondCamera = this.page.locator('text=Camera #2');
+    thirdCamera = this.page.locator('text=Camera #3');
+    fourthCamera = this.page.locator('text=Camera #4');
   
     constructor(protected page: Page) {
       super(page);
@@ -29,44 +34,58 @@ export class DashboardPage extends BasePage {
         await this.page.goto(this.url);
     }
 
-    async lightSwitchOff() {
-        await this.lightOnText.click();
-        await expect(this.lightOffText).toBeVisible();
+    async toggleLightSwitch() {
+      if (await this.lightOnText.isVisible()) {
+          await this.lightOnText.click();
+          await expect(this.lightOffText).toBeVisible();
+      } else {
+          await this.lightOffText.click();
+          await expect(this.lightOnText).toBeVisible();
       }
-
-      async lightSwitchOn() {
-        await this.lightOffText.click();
-        await expect(this.lightOnText).toBeVisible();
+  }
+  
+  async toggleRollerShades() {
+      if (await this.rollerShadesOnText.isVisible()) {
+          await this.rollerShadesOnText.click();
+          await expect(this.rollerShadesOffText).toBeVisible();
+      } else {
+          await this.rollerShadesOffText.click();
+          await expect(this.rollerShadesOnText).toBeVisible();
       }
-
-      async rollerShadesOff() {
-        await this.rollerShadesOnText.click();
-        await expect(this.rollerShadesOffText).toBeVisible();
+  }
+  
+  async toggleAudio() {
+      if (await this.audioOnText.isVisible()) {
+          await this.audioOnText.click();
+          await expect(this.audioOffText).toBeVisible();
+      } else {
+          await this.audioOffText.click();
+          await expect(this.audioOnText).toBeVisible();
       }
-
-      async rollerShadesOn() {
-        await this.rollerShadesOffText.click();
-        await expect(this.rollerShadesOnText).toBeVisible();
+  }
+  
+  async toggleCoffeeMaker() {
+      if (await this.coffeeMakerOnText.isVisible()) {
+          await this.coffeeMakerOnText.click();
+          await expect(this.coffeeMakerOffText).toBeVisible();
+      } else {
+          await this.coffeeMakerOffText.click();
+          await expect(this.coffeeMakerOnText).toBeVisible();
       }
+  }
 
-      async audioOff() {
-        await this.audioOnText.click();
-        await expect(this.audioOffText).toBeVisible();
+      async checkAllCamerasVisible() {
+        const cameras = [
+          this.firstCamera,
+          this.secondCamera,
+          this.thirdCamera,
+          this.fourthCamera,
+        ];
+      
+        await Promise.all(
+          cameras.map(async (camera) => {
+            await expect(camera).toBeVisible();
+          })
+        );
       }
-
-      async audioOn() {
-        await this.audioOffText.click();
-        await expect(this.audioOnText).toBeVisible();
-      }
-
-      async coffeeMakerOff() {
-        await this.coffeeMakerOnText.click();
-        await expect(this.coffeeMakerOffText).toBeVisible();
-      }
-
-      async coffeeMakerOn() {
-        await this.coffeeMakerOffText.click();
-        await expect(this.coffeeMakerOnText).toBeVisible();
-      }
-
 }

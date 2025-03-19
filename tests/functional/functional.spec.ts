@@ -11,23 +11,19 @@ test.describe("Dashboard Functional Tests", () => {
   });
 
       test('User can toggle the light off and on', async () => {
-        await dashboardPage.lightSwitchOff();
-        await dashboardPage.lightSwitchOn();
+        await dashboardPage.toggleLightSwitch();
       });
 
       test('User can toggle roller shades off and on', async () => {
-        await dashboardPage.rollerShadesOff();
-        await dashboardPage.rollerShadesOn();
+        await dashboardPage.toggleRollerShades();
       });
 
       test('User can toggle the audio off and on', async () => {
-        await dashboardPage.audioOff();
-        await dashboardPage.audioOn();
+        await dashboardPage.toggleAudio();
       });
 
       test('User can toggle coffee maker off and on', async () => {
-        await dashboardPage.coffeeMakerOff();
-        await dashboardPage.coffeeMakerOn();
+        await dashboardPage.toggleCoffeeMaker();
       });
 });
   

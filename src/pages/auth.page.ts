@@ -1,6 +1,8 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "./base.page";
 import { LoginUserModel, RegisterUserModel } from "../models/user.model";
+import { appLoginCredentials } from "../test-data/login.data";
+import prepareRandomUser from "../factories/user.factory";
 
 export class AuthPage extends BasePage {
     loginUrl = `${process.env.BASE_URL}/auth/login`;
@@ -43,6 +45,13 @@ export class AuthPage extends BasePage {
         await this.passwordInput.pressSequentially(appLoginCredentials.password);
     }
 
+    async logInUser(credentials: typeof appLoginCredentials): Promise<void>{
+        await this.navigateToLogin();
+        await this.loginToApp(credentials);
+        await this.loginButton.click();
+        await expect(this.headerFullNameLocator).toBeVisible();
+      }
+
     async registerToApp(registerUserData: RegisterUserModel): Promise<void> {
         await this.fullNameInput.pressSequentially(registerUserData.fullName);
         await this.emailInput.pressSequentially(registerUserData.email);
@@ -50,6 +59,17 @@ export class AuthPage extends BasePage {
         await this.repeatPasswordInput.pressSequentially(registerUserData.password);
         await this.agreementCheckbox.click(); 
     }
+
+    async registerAndLogInUser(credentials: typeof appLoginCredentials): Promise<void>{
+        const newUserData = prepareRandomUser();
+        await this.navigateToRegister();
+        await this.registerToApp(newUserData);
+        await this.registerButton.click();
+        await expect(this.headerFullNameLocator).toBeVisible();
+        await this.logOut();
+        await this.logInUser(credentials);
+      };
+    
 
     async logOut(): Promise<void> {
        await this.headerFullNameLocator.click();
