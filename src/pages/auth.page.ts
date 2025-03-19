@@ -11,15 +11,12 @@ export class AuthPage extends BasePage {
     emailInput = this.page.locator('#input-email');
     passwordInput = this.page.locator('#input-password');
     loginButton = this.page.getByRole('button', { name: 'Log In' });
-
     fullNameInput = this.page.locator('#input-name');
     repeatPasswordInput = this.page.locator('#input-re-password');
     agreementCheckbox = this.page.locator('span').first();
     registerButton = this.page.getByRole('button', { name: 'Register' });
-
     defaultFullName = 'Nick Jones'; 
     headerFullNameLocator = this.page.locator('ngx-header').getByText(this.defaultFullName);
-
     logOutTitle = this.page.getByTitle('Log out');
 
     emailInvalidFormatMessage = this.page.getByText('Email should be the real one!');

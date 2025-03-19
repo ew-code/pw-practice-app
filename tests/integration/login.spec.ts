@@ -41,6 +41,7 @@ test.describe("User Login Tests", () => {
 
     // Act
     await authPage.loginToApp(invalidCredentials);
+    await authPage.agreementCheckbox.click();
 
     // Assert
     await expect(authPage.passwordInvalidFormatMessage).toBeVisible();
