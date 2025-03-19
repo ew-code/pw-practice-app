@@ -23,7 +23,7 @@ test("User can log in and check security cameras", async () => {
       await authPage.logInUser(appLoginCredentials);
     });
   
-    await test.step('Check all security cameras are visible', async () => {
+    await test.step("Check all security cameras are visible", async () => {
       await dashboardPage.checkAllCamerasVisible();
    });
 });
@@ -58,7 +58,7 @@ test("User can register, log in, perform actions on core widgets", async () => {
       await authPage.registerAndLogInUser(appLoginCredentials);
   });
 
-    await test.step('Interact with IoT dashboard widgets', async () => {
+    await test.step("Interact with IoT dashboard widgets", async () => {
       await dashboardPage.toggleLightSwitch();
       await dashboardPage.toggleRollerShades();
       await dashboardPage.toggleAudio();
