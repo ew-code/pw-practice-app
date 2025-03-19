@@ -2,6 +2,8 @@
 
 This document provides an overview of the test cases implemented in the project. The tests are categorized into **Smoke**, **Functional**, **Integration**, **End-to-End**, and **Regression** tests.
 
+In total, 20 test cases have been implemented.
+
 ---
 
 ## Smoke Tests
