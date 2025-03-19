@@ -18,7 +18,6 @@ test.describe("End-to-End Tests", () => {
   });
 
 test("User can log in and check security cameras", async () => {
-
     await test.step("Log in with the new user", async () => {
       await authPage.logInUser(appLoginCredentials);
     });
@@ -53,7 +52,6 @@ test("User can view Electricity Consumption for January in different years", asy
   });
 
 test("User can register, log in, perform actions on core widgets", async () => {
-
     await test.step("Register and log in with a new user", async () => {
       await authPage.registerAndLogInUser(appLoginCredentials);
   });
