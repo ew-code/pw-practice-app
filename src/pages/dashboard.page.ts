@@ -25,6 +25,10 @@ export class DashboardPage extends BasePage {
     secondCamera = this.page.locator('text=Camera #2');
     thirdCamera = this.page.locator('text=Camera #3');
     fourthCamera = this.page.locator('text=Camera #4');
+
+    year2015 = this.page.getByRole('link', { name: '2015' })
+    year2016 = this.page.getByRole('link', { name: '2016' })
+    year2017 = this.page.getByRole('link', { name: '2017' })
   
     constructor(protected page: Page) {
       super(page);
