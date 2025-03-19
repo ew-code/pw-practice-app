@@ -20,6 +20,7 @@ test.describe("End-to-End Tests", () => {
 test("User can log in and check security cameras", async () => {
     await test.step("Log in with the new user", async () => {
       await authPage.logInUser(appLoginCredentials);
+      await expect(dashboardPage.userProfileName).toBeVisible();
     });
   
     await test.step("Check all security cameras are visible", async () => {
@@ -36,6 +37,7 @@ test("User can view Electricity Consumption for January in different years", asy
 
     await test.step("Log in with the new user", async () => {
         await authPage.logInUser(appLoginCredentials);
+        await expect(dashboardPage.userProfileName).toBeVisible();
       });
 
     await test.step("Check Electricity Consumption for January 10 years ago", async () => {
@@ -54,13 +56,16 @@ test("User can view Electricity Consumption for January in different years", asy
 test("User can register, log in, perform actions on core widgets", async () => {
     await test.step("Register and log in with a new user", async () => {
       await authPage.registerAndLogInUser(appLoginCredentials);
+      await expect(dashboardPage.userProfileName).toBeVisible();
   });
 
     await test.step("Interact with IoT dashboard widgets", async () => {
-      await dashboardPage.toggleLightSwitch();
-      await dashboardPage.toggleRollerShades();
-      await dashboardPage.toggleAudio();
-      await dashboardPage.toggleCoffeeMaker();
+      await dashboardPage.lightSwitchOff();
+      await dashboardPage.lightSwitchOn();
+      await expect(dashboardPage.lightOnText).toBeVisible();
+      await dashboardPage.coffeeMakerOff();
+      await dashboardPage.coffeeMakerOn();
+      await expect(dashboardPage.coffeeMakerOnText).toBeVisible();
+      });
    });
-});
 });

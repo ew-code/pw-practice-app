@@ -8,8 +8,8 @@ export class DashboardPage extends BasePage {
     iotDashboardLink = this.page.getByRole('link', { name: 'IoT Dashboard' })
     userProfileName = this.page.locator('ngx-header').getByText('Nick Jones')
     lightText = this.page.locator('ngx-dashboard').getByText('Light')
-    lightOff = this.page.getByText('LightOFF');
-    lightOn = this.page.getByText('LightON');
+    lightOffText = this.page.getByText('LightOFF');
+    lightOnText = this.page.getByText('LightON');
     rollerShadesText = this.page.getByText('Roller Shades')
     rollerShadesOnText = this.page.getByText('Roller ShadesON')
     rollerShadesOffText = this.page.getByText('Roller ShadesOFF')
@@ -43,12 +43,12 @@ export class DashboardPage extends BasePage {
     }
 
     async lightSwitchOff() {
-        await this.lightOn.click();
-        await expect(this.lightOff).toBeVisible();
+        await this.lightOnText.click();
+        await expect(this.lightOffText).toBeVisible();
       }
   
       async lightSwitchOn() {
-        await this.lightOff.click();
+        await this.lightOffText.click();
       }
 
       async rollerShadesOff() {
