@@ -8,8 +8,8 @@ export class DashboardPage extends BasePage {
     iotDashboardLink = this.page.getByRole('link', { name: 'IoT Dashboard' })
     userProfileName = this.page.locator('ngx-header').getByText('Nick Jones')
     lightText = this.page.locator('ngx-dashboard').getByText('Light')
-    lightOffText = this.page.getByText('LightOFF');
-    lightOnText = this.page.getByText('LightON');
+    lightOff = this.page.getByText('LightOFF');
+    lightOn = this.page.getByText('LightON');
     rollerShadesText = this.page.getByText('Roller Shades')
     rollerShadesOnText = this.page.getByText('Roller ShadesON')
     rollerShadesOffText = this.page.getByText('Roller ShadesOFF')
@@ -19,8 +19,7 @@ export class DashboardPage extends BasePage {
     coffeeMakerText = this.page.getByText('Coffee Maker');
     coffeeMakerOnText = this.page.getByText('Coffee MakerON');
     coffeeMakerOffText = this.page.getByText('Coffee MakerOFF');
-    roomManagementText = this.page.getByText('Room Management');
-
+    
     firstCamera = this.page.locator('text=Camera #1');
     secondCamera = this.page.locator('text=Camera #2');
     thirdCamera = this.page.locator('text=Camera #3');
@@ -43,45 +42,42 @@ export class DashboardPage extends BasePage {
         await expect(this.page.getByRole('listitem').filter({ hasText: `Jan ${expectedText}` })).toBeVisible();
     }
 
-    async toggleLightSwitch() {
-      if (await this.lightOnText.isVisible()) {
-          await this.lightOnText.click();
-          await expect(this.lightOffText).toBeVisible();
-      } else {
-          await this.lightOffText.click();
-          await expect(this.lightOnText).toBeVisible();
+    async lightSwitchOff() {
+        await this.lightOn.click();
+        await expect(this.lightOff).toBeVisible();
       }
-  }
   
-  async toggleRollerShades() {
-      if (await this.rollerShadesOnText.isVisible()) {
-          await this.rollerShadesOnText.click();
-          await expect(this.rollerShadesOffText).toBeVisible();
-      } else {
-          await this.rollerShadesOffText.click();
-          await expect(this.rollerShadesOnText).toBeVisible();
+      async lightSwitchOn() {
+        await this.lightOff.click();
       }
-  }
-  
-  async toggleAudio() {
-      if (await this.audioOnText.isVisible()) {
-          await this.audioOnText.click();
-          await expect(this.audioOffText).toBeVisible();
-      } else {
-          await this.audioOffText.click();
-          await expect(this.audioOnText).toBeVisible();
+
+      async rollerShadesOff() {
+        await this.rollerShadesOnText.click();
+        await expect(this.rollerShadesOffText).toBeVisible();
       }
-  }
-  
-  async toggleCoffeeMaker() {
-      if (await this.coffeeMakerOnText.isVisible()) {
-          await this.coffeeMakerOnText.click();
-          await expect(this.coffeeMakerOffText).toBeVisible();
-      } else {
-          await this.coffeeMakerOffText.click();
-          await expect(this.coffeeMakerOnText).toBeVisible();
+
+      async rollerShadesOn() {
+        await this.rollerShadesOffText.click();
       }
-  }
+
+
+      async audioOff() {
+        await this.audioOnText.click();
+        await expect(this.audioOffText).toBeVisible();
+      }
+
+      async audioOn() {
+        await this.audioOffText.click();
+      }
+
+      async coffeeMakerOff() {
+        await this.coffeeMakerOnText.click();
+        await expect(this.coffeeMakerOffText).toBeVisible();
+      }
+
+      async coffeeMakerOn() {
+        await this.coffeeMakerOffText.click();
+      }
 
       async checkAllCamerasVisible() {
         const cameras = [
