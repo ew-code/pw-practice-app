@@ -1,4 +1,4 @@
-# Senior QA Engineer - Recruitment test
+# PLaywright-practice-app test
 
 This project is based on **Playwright v1.51.1** and demonstrates the setup of end-to-end tests with Playwright and additional tools like Faker.js for dynamic test data generation.
 
